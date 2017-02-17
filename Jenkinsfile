@@ -6,10 +6,11 @@ pipeline {
         stage('Build') {
             steps {
                 def msbuild = tool 'MSBuild'
-                echo 'Building..'
-                //bat 'C:\ProgramData\NuGet\nuget.exe restore HelloWorld/HelloWorld.sln'
-		        bat "\"${msbuild}\" /HelloWorld/HelloWorld.sln /p:Configuration=Release /p:Platform=\"Any CPU\" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}"
-
+                node{
+                    echo 'Building..'
+                    //bat 'C:\ProgramData\NuGet\nuget.exe restore HelloWorld/HelloWorld.sln'
+                    bat "\"${msbuild}\" /HelloWorld/HelloWorld.sln /p:Configuration=Release /p:Platform=\"Any CPU\" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}"
+                }
             }
         }
         stage('Test') {
